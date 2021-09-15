@@ -1,6 +1,7 @@
 import math
 
 
+
 def find_freq(text):
     freq = {}
     for i in text:
@@ -8,9 +9,12 @@ def find_freq(text):
             freq[i] += 1
         else:
             freq[i] = 1
+    total = sum(freq.values())
+    for letter in freq:
+        freq[letter] = float(freq[letter]/total)
     return freq
 
-print(find_freq("чсмчсмчсм"))
+print(find_freq("авпвапвапыфилшжщж"))
 
 def find_bigram_freq(text):
     freq = {}
@@ -19,10 +23,13 @@ def find_bigram_freq(text):
             freq[text[i:i+2]] += 1
         else:
             freq[text[i:i+2]] = 1
+    total = sum(freq.values())
+    for bigram in freq:
+        freq[bigram] = float(freq[bigram]/total)
     return freq
 
 
-# print(find_bigram_freq("momomemtmdghh"))
+print(find_bigram_freq("momomemtmdghhр"))
 
 
 def find_entropy(text, n = 1):
@@ -37,4 +44,5 @@ def find_entropy(text, n = 1):
     return entropy
 
 
-print(find_entropy("", 1))
+print(find_entropy("sdfdshmaksjhkjvsvksjrbvbjkdf", 1))
+
