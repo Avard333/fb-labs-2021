@@ -1,7 +1,6 @@
 import math
 
 
-
 def find_freq(text):
     freq = {}
     for i in text:
@@ -14,25 +13,38 @@ def find_freq(text):
         freq[letter] = float(freq[letter]/total)
     return freq
 
+
 print(find_freq("авпвапвапыфилшжщж"))
 
-def find_bigram_freq(text):
+
+def find_bigram_freq(text, intersect):
     freq = {}
-    for i in range(0, len(text), 2):
-        if text[i:i+2] in freq:
-            freq[text[i:i+2]] += 1
-        else:
-            freq[text[i:i+2]] = 1
-    total = sum(freq.values())
-    for bigram in freq:
-        freq[bigram] = float(freq[bigram]/total)
+    if intersect:
+        for i in range(0, len(text), 2):
+            if text[i:i+2] in freq:
+                freq[text[i:i+2]] += 1
+            else:
+                freq[text[i:i+2]] = 1
+        total = sum(freq.values())
+        for bigram in freq:
+            freq[bigram] = float(freq[bigram]/total)
+    else:
+        for i in range(0, len(text)):
+            if text[i:i+2] in freq:
+                freq[text[i:i+2]] += 1
+            else:
+                freq[text[i:i+2]] = 1
+        total = sum(freq.values())
+        for bigram in freq:
+            freq[bigram] = float(freq[bigram]/total)
     return freq
 
 
-print(find_bigram_freq("momomemtmdghhр"))
+print(find_bigram_freq("mo momemtmdghhр", True))
+print(find_bigram_freq("mo momemtmdghhр", False))
 
 
-def find_entropy(text, n = 1):
+def find_entropy(text, n=1):
 
     if n == 1:
         freq = find_freq(text)
@@ -44,5 +56,9 @@ def find_entropy(text, n = 1):
     return entropy
 
 
-print(find_entropy("sdfdshmaksjhkjvsvksjrbvbjkdf", 1))
+def find_redundant(h, alph):
+    return 1 - (h/math.log2(alph))
+
+
+# print(find_entropy("sdfdshmaksjhkjvsvksjrbvbjkdf", 1))
 
