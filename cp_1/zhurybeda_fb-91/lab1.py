@@ -97,21 +97,25 @@ import csv
 def write_result(filename, dict):
     with open(filename, 'w') as fp:
         root = csv.writer(fp, delimiter='\t')
-        root.writerow(["Bigram", "freq"])
-        for i, j in dict.items():
-           root.writerow([i, j])
+        for key, val in dict.items():
+           root.writerow([key, val])
 
+def print_freq(dict):
+    for key, val in dict.items():
+        print(key, '|', val)
+    print('\n')
+write_result("tabels/h1_spaces_freq.csv", h1_spaces_freq)
+write_result("tabels/h1_without_spaces_freq.csv", h1_without_spaces_freq)
+write_result("tabels/h2_with_spaces_intersec_freq.csv", h2_with_spaces_intersec_freq)
+write_result("tabels/h2_without_spaces_intersec_freq.csv", h2_without_spaces_intersec_freq)
+write_result("tabels/h2_with_spaces_freq.csv", h2_with_spaces_freq)
+write_result("tabels/h2_without_spaces_freq.csv", h2_without_spaces_freq)
 
-write_result("h1_spaces_freq.csv", h1_spaces_freq)
-write_result("h1_without_spaces_freq.csv", h1_without_spaces_freq)
-write_result("h2_with_spaces_intersec_freq.csv", h2_with_spaces_intersec_freq)
-write_result("h2_without_spaces_intersec_freq.csv", h2_without_spaces_intersec_freq)
-write_result("h2_with_spaces_freq.csv", h2_with_spaces_freq)
-write_result("h2_without_spaces_freq.csv", h2_without_spaces_freq)
+print("h1_with_spaces: ", h1_with_spaces, "redundancy: ", h1_with_spaces_redundant)
+print("h1_without_spaces: ", h1_without_spaces, "redundancy: ", h1_without_spaces_redundant)
+print("h2_with_spaces_intersec: ", h2_with_spaces_intersec, "redundancy: ", h2_with_spaces_intersec_redundant)
+print("h2_without_spaces_intersec: ", h2_without_spaces_intersec, "redundancy: ", h2_without_spaces_intersec_redundant)
+print("h2_with_spaces: ", h2_with_spaces, "redundancy: ", h2_with_spaces_redundant)
+print("h2_without_spaces: ", h2_without_spaces, "redundancy: ", h2_without_spaces_redundant)
 
-print("h1 with spaces: ", h1_with_spaces, "redurendacy: ", h1_with_spaces_redundant)
-print("h1 without spaces: ", h1_without_spaces, "redurendacy: ", h1_without_spaces_redundant)
-print("h2_with_spaces_intersec: ", h2_with_spaces_intersec, "redurendacy: ", h2_with_spaces_intersec_redundant)
-print("h2_without_spaces_intersec: ", h2_without_spaces_intersec, "redurendacy: ", h2_without_spaces_intersec_redundant)
-print("h2_with_spaces: ", h2_with_spaces, "redurendacy: ", h2_with_spaces_redundant)
-print("h2_without_spaces: ", h2_without_spaces, "redurendacy: ", h2_without_spaces_redundant)
+print_freq(h2_without_spaces_freq)
