@@ -1,4 +1,4 @@
-filename = 'text.txt'
+filename = 'coded_text.txt'
 file = open(filename, 'rt')
 text = file.read()
 
@@ -11,6 +11,6 @@ for char in BAN:
 
 text = text.replace("ё","е")
 non_spaces_text = "".join(text.split())
-nspace_text_file = open("clean_text.txt", "w")
+nspace_text_file = open("coded_text.txt", "w")
 nspace_text_file.write(non_spaces_text)
 nspace_text_file.close()
