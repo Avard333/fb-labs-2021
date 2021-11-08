@@ -21,6 +21,7 @@ def find_bigram_freq(text):
 freq = find_bigram_freq(TEXT)
 sorted_freq = dict(sorted(freq.items(), key=lambda item: item[1], reverse=True))
 top_cypher_bi = list(sorted_freq)[:5]
+print(top_cypher_bi)
 top_bi = ["ст", "но", "то", "на", "ен"]
 
 alph = ['а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х',
@@ -92,6 +93,6 @@ for key in keys:
 def check(texts):
     clean_text = []
     for text in texts:
-        if not any(text.find("ьо"), text.find("оооо"), text.find("ьа")):
+        if not any(text.find("аь"), text.find("оо"), text.find("оь")):
             clean_text.append(text)
     return clean_text
