@@ -34,20 +34,23 @@ def miller_rabin(n, k=40):
 
 def gen_prime(bits):
     while True:
-        a = (random.randrange(1 << bits - 1, 1 << bits) << 1) + 1
+        a = (random.randrange(2**(bits-1), 2**bits))
         if miller_rabin(a):
             return a
 
 
 def generate_primes():
-	p = gen_prime(256)
-	q = gen_prime(256)
-	p1 = gen_prime(256)
-	q1 = gen_prime(256)
-	while not p*q <= p1*q1:
-		generate()
-		return p, q, p1, q1
-
-print(generate_primes())
+    p = gen_prime(256)
+    q = gen_prime(256)
+    p1 = gen_prime(256)
+    q1 = gen_prime(256)
+    while not p * q <= p1 * q1:
+        generate_primes()
+        return p, q, p1, q1
 
 
+def gen_keys(p, q):
+    n = p * q
+    pass
+
+print(gen_prime(256))
