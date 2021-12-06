@@ -40,15 +40,6 @@ def gen_prime(bits):
             return a
 
 
-def generate_primes():
-    p = gen_prime(256)
-    q = gen_prime(256)
-    p1 = gen_prime(256)
-    q1 = gen_prime(256)
-    while not p * q <= p1 * q1:
-        generate_primes()
-    return p, q, p1, q1
-
 
 def euclid(a, b):
     if not b:
@@ -68,7 +59,7 @@ def GenerateKeyPair(p, q):
     e = random.randrange(2, fn - 1)
     while math.gcd(e, fn) != 1:
         e = random.randrange(2, fn - 1)
-    d = re(e, fn)
+    d = re(e, fn)%fn
     return d, n, e
 
 
@@ -99,7 +90,7 @@ def SendKey(k,e1,n1, S):
 def ReceiveKey(k1,S1,d1,n1):
     k = fast_pow(k1,d1,n1)
     S = fast_pow(S1,d1,n1)
-    return k,S
+    return k, S
 
 def auth(S, e, n):
     k = fast_pow(S, e, n)
@@ -116,7 +107,8 @@ d, n, e = GenerateKeyPair(p, q)
 
 d1, n1, e1 = GenerateKeyPair(p1, q1)
 print('n: ',n,'\ne:',e,'\nd:',d)
-M = random.randint(0,n)
+# M = random.randint(0,n)
+M = 1848071151586865208136788829907359312232716431938205295121696102514916928375815365197506529614363687569594640829234893520859494305204668393401028932482696
 C = encrypt(M, e, n)
 M_test = decrypt(C, d, n)
 
@@ -126,7 +118,7 @@ print("C: ", C)
 f = (p - 1) * (q - 1)
 print("f:", f)
 
-print(M == M_test)
+print("Text verification: ", M == M_test)
 
 
 k = random.randint(0,n)
@@ -135,6 +127,6 @@ S = sign(k, d, n)
 K1, S1 = SendKey(k, e1, n1, S)
 K, S_rec = ReceiveKey(K1, S1, d1, n1)
 k_rec = auth(S, e, n)
-print(k == k_rec)
+print("Key verification: ", k == k_rec)
 
 
